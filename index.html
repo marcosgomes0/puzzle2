@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Puzzle 2</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        html{
+            background-color: rgb(25, 24, 24);
+        }
+        .corpo{
+            background-image: url(img/Textura.svg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            width: 100vw;
+            height: 100vh;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .caixa{
+            width: 500px;
+            padding: 10px;
+            background-color: rgb(25, 24, 24);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            border: 1px solid rgb(52, 50, 50);
+            border-radius: 10px;
+            box-shadow: 5px 5px 12px;
+            text-align: center;
+            font-family: poppins;
+            box-sizing: border-box;
+        }
+        .caixa > div{
+            color: aliceblue;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        .caixa > input{
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        .confirme{
+            width: 100%;
+            padding: 5px;
+            font-family: poppins;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .erro{
+            display: none;
+            font-size: 0.8rem !important;
+        }
+        .acerto{
+            display: none;
+            font-size: 1.2rem !important;
+        }
+        .erroAtivo{
+            display: block;
+            color: red !important;
+        }
+        .acertoAtivo{
+            display: block;
+            color: rgb(5, 255, 5) !important;
+        }
+        img{
+            max-width: 100%;
+        }
+        .imageBox1{
+            display: none;
+        }
+        .imageBox2{
+            display: none;
+        }
+        .imagens-erro{
+            box-sizing: border-box;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            justify-content: center;
+            align-items: center;
+        }
+        .imagens-acerto{
+            box-sizing: border-box;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            justify-content: center;
+            align-items: center;
+        }
+        .imagens-acerto-ativo{
+            display: block;
+        }
+        .imagens-erro-ativo{
+            display: block;
+        }
+        .logo{
+            position: absolute;
+            z-index: 100;
+            top: 90px;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            max-width: 180px;
+        }
+    </style>
+</head>
+<body>
+    <img class="logo" src="img/Ordem Logo.svg" alt="logoOrdem">
+    <div class="corpo">
+        <div class="caixa">
+            <div>Digite a senha</div>
+            <input class="value" type="text">
+            <button class="confirme">Confirmar</button>
+            <div class="erro">Onde você errou? Tente novamente</div>
+            <div class="acerto">Nossa, você é incrível! Abra o saco de lixo 2!</div>
+            <div class="imageBox1">
+                <div class="imagens-erro">
+                    <img class="naogrita" src="img/cellbit-ordem-paranormal.gif" alt="nao-grita">
+                    <img class="rindo" src="img/cellbit-cat.gif" alt="rindo">
+                </div>
+            </div>
+            <div class="imageBox2">
+                <div class="imagens-acerto">
+                    <img class="beamon" src="img/ordem-paranormal-hexatombe.gif" alt="beamon">
+                    <img class="caligrafo" src="img/caligrafo-terror.gif" alt="caligrafo">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const botao = document.querySelector(".confirme")
+        const valor = document.querySelector(".value")
+        const acerto = document.querySelector(".acerto")
+        const erro = document.querySelector(".erro")
+        const imagensErro = document.querySelector('.imageBox1')
+        const imagensAcerto = document.querySelector('.imageBox2')
+
+        function calculeValor(){
+            numero = valor.value
+            acerto.classList.remove('acertoAtivo')
+            erro.classList.remove('erroAtivo')
+            imagensErro.classList.remove('imagens-erro-ativo')
+            imagensAcerto.classList.remove('imagens-acerto-ativo')
+            if (numero == '365'){
+                imagensAcerto.classList.add('imagens-acerto-ativo')
+                acerto.classList.add('acertoAtivo')
+                console.log(acerto)
+            } else{
+                erro.classList.add('erroAtivo')
+                imagensErro.classList.add('imagens-erro-ativo')
+                setTimeout(()=>{
+                    erro.classList.remove('erroAtivo')
+                    imagensErro.classList.remove('imagens-erro-ativo')
+                },[5000])
+            }
+            console.log(numero)
+        }
+        botao.addEventListener('click', calculeValor)
+        
+    </script>
+</body>
+</html>
